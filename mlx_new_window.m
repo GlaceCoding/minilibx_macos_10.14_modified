@@ -312,25 +312,34 @@ int get_mouse_button(NSEventType eventtype)
 }
 
 
-- (void) exposeNotification:(NSNotification *)note
+- (void) becomeMainNotification:(NSNotification *)note
 {
-  //    printf("Expose...\n");
-    if (event_funct[12] != NULL)
-      event_funct[12](event_param[12]);
-    //    printf("Expose done.\n");
+  if (event_funct[ON_FOCUSCHANGE] != NULL)
+    event_funct[ON_FOCUSCHANGE](1, event_param[ON_FOCUSCHANGE]);
+}
+
+- (void) resignMainNotification:(NSNotification *)note
+{
+  if (event_funct[ON_FOCUSCHANGE] != NULL)
+    event_funct[ON_FOCUSCHANGE](0, event_param[ON_FOCUSCHANGE]);
+}
+
+- (void) miniaturizeNotification:(NSNotification *)note
+{
+  if (event_funct[ON_VISIBILITYCHANGE] != NULL)
+    event_funct[ON_VISIBILITYCHANGE](0, event_param[ON_VISIBILITYCHANGE]);
+}
+
+- (void) deminiaturizeNotification:(NSNotification *)note
+{
+  if (event_funct[ON_VISIBILITYCHANGE] != NULL)
+    event_funct[ON_VISIBILITYCHANGE](1, event_param[ON_VISIBILITYCHANGE]);
 }
 
 - (void) closeNotification:(NSNotification *)note
 {
   if (event_funct[ON_DESTROY] != NULL)
     event_funct[ON_DESTROY](event_param[ON_DESTROY]);
-}
-
-- (void) deminiaturizeNotification:(NSNotification *)note
-{
-  //  if (event_funct[??] != NULL)
-  //    event_funct[??](event_param[??]);
-  [self exposeNotification:note];
 }
 @end
 
@@ -366,8 +375,12 @@ int get_mouse_button(NSEventType eventtype)
 
       [self setNextKeyView:self];
 
-      //      [[NSNotificationCenter defaultCenter] addObserver:win selector:@selector(exposeNotification:) name:@"NSWindowDidExposeNotification" object:nil];
-      [[NSNotificationCenter defaultCenter] addObserver:win selector:@selector(exposeNotification:) name:@"NSWindowDidBecomeKeyNotification" object:win];
+      // NSWindowWillMoveNotification
+      // NSWindowDidMoveNotification
+
+      [[NSNotificationCenter defaultCenter] addObserver:win selector:@selector(becomeMainNotification:) name:@"NSWindowDidBecomeMainNotification" object:win];
+      [[NSNotificationCenter defaultCenter] addObserver:win selector:@selector(resignMainNotification:) name:@"NSWindowDidResignMainNotification" object:win];
+      [[NSNotificationCenter defaultCenter] addObserver:win selector:@selector(miniaturizeNotification:) name:@"NSWindowDidMiniaturizeNotification" object:win];
       [[NSNotificationCenter defaultCenter] addObserver:win selector:@selector(deminiaturizeNotification:) name:@"NSWindowDidDeminiaturizeNotification" object:win];
       [[NSNotificationCenter defaultCenter] addObserver:win selector:@selector(closeNotification:) name:@"NSWindowWillCloseNotification" object:win];
       // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ctxNeedsUpdate:)
