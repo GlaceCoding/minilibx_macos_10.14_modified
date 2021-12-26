@@ -83,7 +83,7 @@ int get_mouse_button(NSEventType eventtype)
 {
   event_funct[event] = func;
   event_param[event] = param;
-  if (event == 6) // motion notify
+  if (event == ON_MOUSEMOVE) // motion notify
     {
       if (func == NULL)
 	[self setAcceptsMouseMovedEvents:NO];
@@ -118,34 +118,34 @@ int get_mouse_button(NSEventType eventtype)
   the_key = 1;
   while (((val >> (the_key-1)) & 0x01)==0)
     the_key ++;
-  if (flag > keyflag && event_funct[2] != NULL)
-    event_funct[2](0xFF+the_key, event_param[2]);
-  if (flag < keyflag && event_funct[3] != NULL)
-    event_funct[3](0xFF+the_key, event_param[3]);
+  if (flag > keyflag && event_funct[ON_KEYDOWN] != NULL)
+    event_funct[ON_KEYDOWN](0xFF+the_key, event_param[ON_KEYDOWN]);
+  if (flag < keyflag && event_funct[ON_KEYUP] != NULL)
+    event_funct[ON_KEYUP](0xFF+the_key, event_param[ON_KEYUP]);
   /*
-  if (event_funct[2] != NULL)
+  if (event_funct[ON_KEYDOWN] != NULL)
     {
-      if (!(keyflag & NSAlphaShiftKeyMask) && (flag&NSAlphaShiftKeyMask)) event_funct[2](0xFF+1, event_param[2]);
-      if (!(keyflag & NSShiftKeyMask) && (flag&NSShiftKeyMask)) event_funct[2](0xFF+2, event_param[2]);
-      if (!(keyflag & NSControlKeyMask) && (flag&NSControlKeyMask)) event_funct[2](0xFF+3, event_param[2]);
-      if (!(keyflag & NSAlternateKeyMask) && (flag&NSAlternateKeyMask)) event_funct[2](0xFF+4, event_param[2]);
-      if (!(keyflag & NSCommandKeyMask) && (flag&NSCommandKeyMask)) event_funct[2](0xFF+5, event_param[2]);
-      if (!(keyflag & NSNumericPadKeyMask) && (flag&NSNumericPadKeyMask)) event_funct[2](0xFF+6, event_param[2]);
-      if (!(keyflag & NSHelpKeyMask) && (flag&NSHelpKeyMask)) event_funct[2](0xFF+7, event_param[2]);
-      if (!(keyflag & NSFunctionKeyMask) && (flag&NSFunctionKeyMask)) event_funct[2](0xFF+8, event_param[2]);
+      if (!(keyflag & NSAlphaShiftKeyMask) && (flag&NSAlphaShiftKeyMask)) event_funct[ON_KEYDOWN](0xFF+1, event_param[ON_KEYDOWN]);
+      if (!(keyflag & NSShiftKeyMask) && (flag&NSShiftKeyMask)) event_funct[ON_KEYDOWN](0xFF+2, event_param[ON_KEYDOWN]);
+      if (!(keyflag & NSControlKeyMask) && (flag&NSControlKeyMask)) event_funct[ON_KEYDOWN](0xFF+3, event_param[ON_KEYDOWN]);
+      if (!(keyflag & NSAlternateKeyMask) && (flag&NSAlternateKeyMask)) event_funct[ON_KEYDOWN](0xFF+4, event_param[ON_KEYDOWN]);
+      if (!(keyflag & NSCommandKeyMask) && (flag&NSCommandKeyMask)) event_funct[ON_KEYDOWN](0xFF+5, event_param[ON_KEYDOWN]);
+      if (!(keyflag & NSNumericPadKeyMask) && (flag&NSNumericPadKeyMask)) event_funct[ON_KEYDOWN](0xFF+6, event_param[ON_KEYDOWN]);
+      if (!(keyflag & NSHelpKeyMask) && (flag&NSHelpKeyMask)) event_funct[ON_KEYDOWN](0xFF+7, event_param[ON_KEYDOWN]);
+      if (!(keyflag & NSFunctionKeyMask) && (flag&NSFunctionKeyMask)) event_funct[ON_KEYDOWN](0xFF+8, event_param[ON_KEYDOWN]);
     }
-  if (event_funct[3] != NULL)
+  if (event_funct[ON_KEYUP] != NULL)
     {
-      if ((keyflag & NSShiftKeyMask) && !(flag&NSShiftKeyMask)) event_funct[3](NSShiftKeyMask, event_param[3]);
+      if ((keyflag & NSShiftKeyMask) && !(flag&NSShiftKeyMask)) event_funct[ON_KEYUP](NSShiftKeyMask, event_param[ON_KEYUP]);
 
-      if ((keyflag & NSAlphaShiftKeyMask) && !(flag&NSAlphaShiftKeyMask)) event_funct[3](0xFF+1, event_param[3]);
-      if ((keyflag & NSShiftKeyMask) && !(flag&NSShiftKeyMask)) event_funct[3](0xFF+2, event_param[3]);
-      if ((keyflag & NSControlKeyMask) && !(flag&NSControlKeyMask)) event_funct[3](0xFF+3, event_param[3]);
-      if ((keyflag & NSAlternateKeyMask) && !(flag&NSAlternateKeyMask)) event_funct[3](0xFF+4, event_param[3]);
-      if ((keyflag & NSCommandKeyMask) && !(flag&NSCommandKeyMask)) event_funct[3](0xFF+5, event_param[3]);
-      if ((keyflag & NSNumericPadKeyMask) && !(flag&NSNumericPadKeyMask)) event_funct[3](0xFF+6, event_param[3]);
-      if ((keyflag & NSHelpKeyMask) && !(flag&NSHelpKeyMask)) event_funct[3](0xFF+7, event_param[3]);
-      if ((keyflag & NSFunctionKeyMask) && !(flag&NSFunctionKeyMask)) event_funct[3](0xFF+8, event_param[3]);
+      if ((keyflag & NSAlphaShiftKeyMask) && !(flag&NSAlphaShiftKeyMask)) event_funct[ON_KEYUP](0xFF+1, event_param[ON_KEYUP]);
+      if ((keyflag & NSShiftKeyMask) && !(flag&NSShiftKeyMask)) event_funct[ON_KEYUP](0xFF+2, event_param[ON_KEYUP]);
+      if ((keyflag & NSControlKeyMask) && !(flag&NSControlKeyMask)) event_funct[ON_KEYUP](0xFF+3, event_param[ON_KEYUP]);
+      if ((keyflag & NSAlternateKeyMask) && !(flag&NSAlternateKeyMask)) event_funct[ON_KEYUP](0xFF+4, event_param[ON_KEYUP]);
+      if ((keyflag & NSCommandKeyMask) && !(flag&NSCommandKeyMask)) event_funct[ON_KEYUP](0xFF+5, event_param[ON_KEYUP]);
+      if ((keyflag & NSNumericPadKeyMask) && !(flag&NSNumericPadKeyMask)) event_funct[ON_KEYUP](0xFF+6, event_param[ON_KEYUP]);
+      if ((keyflag & NSHelpKeyMask) && !(flag&NSHelpKeyMask)) event_funct[ON_KEYUP](0xFF+7, event_param[ON_KEYUP]);
+      if ((keyflag & NSFunctionKeyMask) && !(flag&NSFunctionKeyMask)) event_funct[ON_KEYUP](0xFF+8, event_param[ON_KEYUP]);
     }
   */
   keyflag = flag;
@@ -156,16 +156,16 @@ int get_mouse_button(NSEventType eventtype)
   if (keyrepeat==0 && [theEvent isARepeat])
     return ;
   //  printf("Key Down: %d\n", [theEvent keyCode]);
-  if (event_funct[2] != NULL)
-    event_funct[2]([theEvent keyCode], event_param[2]);
+  if (event_funct[ON_KEYDOWN] != NULL)
+    event_funct[ON_KEYDOWN]([theEvent keyCode], event_param[ON_KEYDOWN]);
   //  else [super keyDown: theEvent];
 }
 
 - (void) keyUp:(NSEvent *)theEvent
 {
   //  printf("Key Up: %d\n", [theEvent keyCode]);
-  if (event_funct[3] != NULL)
-    event_funct[3]([theEvent keyCode], event_param[3]);
+  if (event_funct[ON_KEYUP] != NULL)
+    event_funct[ON_KEYUP]([theEvent keyCode], event_param[ON_KEYUP]);
   //  else [super keyUp: theEvent];
 
 }
@@ -178,8 +178,8 @@ int get_mouse_button(NSEventType eventtype)
   thepoint = [theEvent locationInWindow];
   button = get_mouse_button([theEvent type]);
   //  printf("Mouse pressed bt %d  pos: %f, %f\n", button, thepoint.x, thepoint.y);
-  if (event_funct[4] != NULL)
-    event_funct[4](button, (int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[4]);
+  if (event_funct[ON_MOUSEDOWN] != NULL)
+    event_funct[ON_MOUSEDOWN](button, (int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[ON_MOUSEDOWN]);
 }
 
 - (void) rightMouseDown:(NSEvent *)theEvent
@@ -190,8 +190,8 @@ int get_mouse_button(NSEventType eventtype)
   thepoint = [theEvent locationInWindow];
   button = get_mouse_button([theEvent type]);
   //  printf("Mouse pressed bt %d  pos: %f, %f\n", button, thepoint.x, thepoint.y);
-  if (event_funct[4] != NULL)
-    event_funct[4](button, (int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[4]);
+  if (event_funct[ON_MOUSEDOWN] != NULL)
+    event_funct[ON_MOUSEDOWN](button, (int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[ON_MOUSEDOWN]);
 }
 
 - (void) otherMouseDown:(NSEvent *)theEvent
@@ -202,8 +202,8 @@ int get_mouse_button(NSEventType eventtype)
   thepoint = [theEvent locationInWindow];
   button = get_mouse_button([theEvent type]);
   //  printf("Mouse pressed bt %d  pos: %f, %f\n", button, thepoint.x, thepoint.y);
-  if (event_funct[4] != NULL)
-    event_funct[4](button, (int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[4]);
+  if (event_funct[ON_MOUSEDOWN] != NULL)
+    event_funct[ON_MOUSEDOWN](button, (int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[ON_MOUSEDOWN]);
 }
 
 - (void) mouseUp:(NSEvent *)theEvent
@@ -214,8 +214,8 @@ int get_mouse_button(NSEventType eventtype)
   thepoint = [theEvent locationInWindow];
   button = get_mouse_button([theEvent type]);
   //  printf("Mouse release bt %d  pos: %f, %f\n", button, thepoint.x, thepoint.y);
-  if (event_funct[5] != NULL)
-    event_funct[5](button, (int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[5]);
+  if (event_funct[ON_MOUSEUP] != NULL)
+    event_funct[ON_MOUSEUP](button, (int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[ON_MOUSEUP]);
 }
 
 - (void) rightMouseUp:(NSEvent *)theEvent
@@ -226,8 +226,8 @@ int get_mouse_button(NSEventType eventtype)
   thepoint = [theEvent locationInWindow];
   button = get_mouse_button([theEvent type]);
   //  printf("Mouse release bt %d  pos: %f, %f\n", button, thepoint.x, thepoint.y);
-  if (event_funct[5] != NULL)
-    event_funct[5](button, (int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[5]);
+  if (event_funct[ON_MOUSEUP] != NULL)
+    event_funct[ON_MOUSEUP](button, (int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[ON_MOUSEUP]);
 }
 
 - (void) otherMouseUp:(NSEvent *)theEvent
@@ -238,8 +238,8 @@ int get_mouse_button(NSEventType eventtype)
   thepoint = [theEvent locationInWindow];
   button = get_mouse_button([theEvent type]);
   //  printf("Mouse release bt %d  pos: %f, %f\n", button, thepoint.x, thepoint.y);
-  if (event_funct[5] != NULL)
-    event_funct[5](button, (int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[5]);
+  if (event_funct[ON_MOUSEUP] != NULL)
+    event_funct[ON_MOUSEUP](button, (int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[ON_MOUSEUP]);
 }
 
 - (void) mouseMoved:(NSEvent *)theEvent
@@ -248,8 +248,8 @@ int get_mouse_button(NSEventType eventtype)
 
   thepoint = [theEvent locationInWindow];
   //  printf("Mouse moved  pos: %f, %f\n", thepoint.x, thepoint.y);
-  if (event_funct[6] != NULL)
-    event_funct[6]((int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[6]);
+  if (event_funct[ON_MOUSEMOVE] != NULL)
+    event_funct[ON_MOUSEMOVE]((int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[ON_MOUSEMOVE]);
 }
 
 
@@ -259,8 +259,8 @@ int get_mouse_button(NSEventType eventtype)
 
   thepoint = [theEvent locationInWindow];
   //  printf("Mouse moved  pos: %f, %f\n", thepoint.x, thepoint.y);
-  if (event_funct[6] != NULL)
-    event_funct[6]((int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[6]);
+  if (event_funct[ON_MOUSEMOVE] != NULL)
+    event_funct[ON_MOUSEMOVE]((int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[ON_MOUSEMOVE]);
 }
 
 
@@ -270,8 +270,8 @@ int get_mouse_button(NSEventType eventtype)
 
   thepoint = [theEvent locationInWindow];
   //  printf("Mouse moved  pos: %f, %f\n", thepoint.x, thepoint.y);
-  if (event_funct[6] != NULL)
-    event_funct[6]((int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[6]);
+  if (event_funct[ON_MOUSEMOVE] != NULL)
+    event_funct[ON_MOUSEMOVE]((int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[ON_MOUSEMOVE]);
 }
 
 
@@ -281,8 +281,8 @@ int get_mouse_button(NSEventType eventtype)
 
   thepoint = [theEvent locationInWindow];
   //  printf("Mouse moved  pos: %f, %f\n", thepoint.x, thepoint.y);
-  if (event_funct[6] != NULL)
-    event_funct[6]((int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[6]);
+  if (event_funct[ON_MOUSEMOVE] != NULL)
+    event_funct[ON_MOUSEMOVE]((int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[ON_MOUSEMOVE]);
 }
 
 
@@ -292,7 +292,7 @@ int get_mouse_button(NSEventType eventtype)
   int     button;
   float	  sens;
 
-  if (event_funct[4] == NULL)
+  if (event_funct[ON_MOUSEDOWN] == NULL)
     return ;
 
   button = 0;
@@ -308,7 +308,7 @@ int get_mouse_button(NSEventType eventtype)
   if (sens < -0.2)
     button = 7;
   if (button != 0)
-    event_funct[4](button, (int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[4]);
+    event_funct[ON_MOUSEDOWN](button, (int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[ON_MOUSEDOWN]);
 }
 
 
@@ -322,8 +322,8 @@ int get_mouse_button(NSEventType eventtype)
 
 - (void) closeNotification:(NSNotification *)note
 {
-  if (event_funct[17] != NULL)
-    event_funct[17](event_param[17]);
+  if (event_funct[ON_DESTROY] != NULL)
+    event_funct[ON_DESTROY](event_param[ON_DESTROY]);
 }
 
 - (void) deminiaturizeNotification:(NSNotification *)note

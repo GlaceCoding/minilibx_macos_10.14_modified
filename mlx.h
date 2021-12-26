@@ -43,6 +43,8 @@
 #ifndef MLX_H
 # define MLX_H
 
+# include "mlx_event.h"
+
 void			*mlx_init(void);
 /*
 **  needed before everything else.
