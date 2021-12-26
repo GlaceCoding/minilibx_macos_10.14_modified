@@ -18,8 +18,11 @@ CFLAGS		= -O2 -Wno-deprecated
 
 all: $(NAME)
 
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
 $(NAME): $(OBJS)
-	ar -r $(NAME) $(OBJS)
+	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)
 
 clean:
@@ -28,4 +31,6 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
-re: all clean fclean
+re: fclean all
+
+.PHONY: all clean fclean re
