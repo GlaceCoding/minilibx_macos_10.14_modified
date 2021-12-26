@@ -672,22 +672,6 @@ void mlx_clear_window(mlx_ptr_t *mlx_ptr, mlx_win_list_t *win_ptr)
   win_ptr->nb_flush ++;
 }
 
-
-void mlx_expose_hook(mlx_win_list_t *win_ptr, int (*funct_ptr)(), void *param)
-{
-  [(id)(win_ptr->winid) setEvent:12 andFunc:funct_ptr andParam:param];
-}
-
-void mlx_key_hook(mlx_win_list_t *win_ptr, int (*funct_ptr)(), void *param)
-{
-  [(id)(win_ptr->winid) setEvent:3 andFunc:funct_ptr andParam:param];
-}
-
-void mlx_mouse_hook(mlx_win_list_t *win_ptr, int (*funct_ptr)(), void *param)
-{
-  [(id)(win_ptr->winid) setEvent:4 andFunc:funct_ptr andParam:param];
-}
-
 void mlx_hook(mlx_win_list_t *win_ptr, int x_event, int (*funct_ptr)(), void *param)
 {
   [(id)(win_ptr->winid) setEvent:x_event andFunc:funct_ptr andParam:param];

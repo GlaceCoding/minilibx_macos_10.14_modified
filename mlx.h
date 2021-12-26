@@ -90,14 +90,17 @@ unsigned int	mlx_get_color_value(void *mlx_ptr, int color);
 
 /*
 ** dealing with Events
+**
+** mouse events :
+**		int hook(int button, int x, int y, void *param)
+** key events :
+** 		int hook(int keycode, void *param)
+** expose event :
+**		int (*funct_ptr)(void *param)
 */
 
-int				mlx_mouse_hook(void *win_ptr, int (*funct_ptr)(), void *param);
-				//		int (*mouse_hook)(int button, int x, int y, void *param)
-int				mlx_key_hook(void *win_ptr, int (*funct_ptr)(), void *param);
-				//		int (*key_hook)(int keycode, void *param)
-int				mlx_expose_hook(void *win_ptr, int (*funct_ptr)(), void *param);
-				// 							   int (*funct_ptr)(void *param)
+int				mlx_hook(void *win_ptr, int x_event, int (*funct)(),
+					void *param);
 int				mlx_loop_hook(void *mlx_ptr, int (*funct_ptr)(), void *param);
 				// 							 int (*funct_ptr)(void *param)
 int				mlx_loop(void *mlx_ptr);
