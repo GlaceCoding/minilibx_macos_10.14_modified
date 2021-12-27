@@ -6,7 +6,7 @@
 /*   By: gphilipp <gphilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 18:06:24 by gphilipp          #+#    #+#             */
-/*   Updated: 2021/12/27 01:56:25 by gphilipp         ###   ########.fr       */
+/*   Updated: 2021/12/27 09:12:22 by gphilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,13 @@ enum {
 };
 
 typedef struct s_xpoint {
-	float		x;
-	float		y;
+	int			x;
+	int			y;
 }			t_xpoint;
+
+typedef struct s_xwheel {
+	float		dx;
+	float		dy;
+}			t_xwheel;
 
 #endif

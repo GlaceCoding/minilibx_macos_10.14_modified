@@ -172,124 +172,175 @@ int get_mouse_button(NSEventType eventtype)
 
 - (void) mouseDown:(NSEvent *)theEvent
 {
-  NSPoint thepoint;
-  int     button;
+  NSPoint  thepoint;
+  t_xpoint point;
+  int      button;
 
   thepoint = [theEvent locationInWindow];
   button = get_mouse_button([theEvent type]);
   //  printf("Mouse pressed bt %d  pos: %f, %f\n", button, thepoint.x, thepoint.y);
   if (event_funct[ON_MOUSEDOWN] != NULL)
-    event_funct[ON_MOUSEDOWN](button, (int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[ON_MOUSEDOWN]);
+  {
+    point.x = (int)(thepoint.x);
+    point.y = size_y - 1 - (int)(thepoint.y);
+    event_funct[ON_MOUSEDOWN](button, point, event_param[ON_MOUSEDOWN]);
+  }
 }
 
 - (void) rightMouseDown:(NSEvent *)theEvent
 {
-  NSPoint thepoint;
-  int     button;
+  NSPoint  thepoint;
+  t_xpoint point;
+  int      button;
 
   thepoint = [theEvent locationInWindow];
   button = get_mouse_button([theEvent type]);
   //  printf("Mouse pressed bt %d  pos: %f, %f\n", button, thepoint.x, thepoint.y);
   if (event_funct[ON_MOUSEDOWN] != NULL)
-    event_funct[ON_MOUSEDOWN](button, (int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[ON_MOUSEDOWN]);
+  {
+    point.x = (int)(thepoint.x);
+    point.y = size_y - 1 - (int)(thepoint.y);
+    event_funct[ON_MOUSEDOWN](button, point, event_param[ON_MOUSEDOWN]);
+  }
 }
 
 - (void) otherMouseDown:(NSEvent *)theEvent
 {
   NSPoint thepoint;
+  t_xpoint point;
   int     button;
 
   thepoint = [theEvent locationInWindow];
   button = get_mouse_button([theEvent type]);
   //  printf("Mouse pressed bt %d  pos: %f, %f\n", button, thepoint.x, thepoint.y);
   if (event_funct[ON_MOUSEDOWN] != NULL)
-    event_funct[ON_MOUSEDOWN](button, (int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[ON_MOUSEDOWN]);
+  {
+    point.x = (int)(thepoint.x);
+    point.y = size_y - 1 - (int)(thepoint.y);
+    event_funct[ON_MOUSEDOWN](button, point, event_param[ON_MOUSEDOWN]);
+  }
 }
 
 - (void) mouseUp:(NSEvent *)theEvent
 {
   NSPoint thepoint;
+  t_xpoint point;
   int     button;
 
   thepoint = [theEvent locationInWindow];
   button = get_mouse_button([theEvent type]);
   //  printf("Mouse release bt %d  pos: %f, %f\n", button, thepoint.x, thepoint.y);
   if (event_funct[ON_MOUSEUP] != NULL)
-    event_funct[ON_MOUSEUP](button, (int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[ON_MOUSEUP]);
+  {
+    point.x = (int)(thepoint.x);
+    point.y = size_y - 1 - (int)(thepoint.y);
+    event_funct[ON_MOUSEUP](button, point, event_param[ON_MOUSEUP]);
+  }
 }
 
 - (void) rightMouseUp:(NSEvent *)theEvent
 {
   NSPoint thepoint;
+  t_xpoint point;
   int     button;
 
   thepoint = [theEvent locationInWindow];
   button = get_mouse_button([theEvent type]);
   //  printf("Mouse release bt %d  pos: %f, %f\n", button, thepoint.x, thepoint.y);
   if (event_funct[ON_MOUSEUP] != NULL)
-    event_funct[ON_MOUSEUP](button, (int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[ON_MOUSEUP]);
+  {
+    point.x = (int)(thepoint.x);
+    point.y = size_y - 1 - (int)(thepoint.y);
+    event_funct[ON_MOUSEUP](button, point, event_param[ON_MOUSEUP]);
+  }
 }
 
 - (void) otherMouseUp:(NSEvent *)theEvent
 {
   NSPoint thepoint;
+  t_xpoint point;
   int     button;
 
   thepoint = [theEvent locationInWindow];
   button = get_mouse_button([theEvent type]);
   //  printf("Mouse release bt %d  pos: %f, %f\n", button, thepoint.x, thepoint.y);
   if (event_funct[ON_MOUSEUP] != NULL)
-    event_funct[ON_MOUSEUP](button, (int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[ON_MOUSEUP]);
+  {
+    point.x = (int)(thepoint.x);
+    point.y = size_y - 1 - (int)(thepoint.y);
+    event_funct[ON_MOUSEUP](button, point, event_param[ON_MOUSEUP]);
+  }
 }
 
 - (void) mouseMoved:(NSEvent *)theEvent
 {
   NSPoint thepoint;
+  t_xpoint point;
 
   thepoint = [theEvent locationInWindow];
   //  printf("Mouse moved  pos: %f, %f\n", thepoint.x, thepoint.y);
   if (event_funct[ON_MOUSEMOVE] != NULL)
-    event_funct[ON_MOUSEMOVE]((int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[ON_MOUSEMOVE]);
+  {
+    point.x = (int)(thepoint.x);
+    point.y = size_y - 1 - (int)(thepoint.y);
+    event_funct[ON_MOUSEMOVE](point, event_param[ON_MOUSEMOVE]);
+  }
 }
 
 
 - (void) mouseDragged:(NSEvent *)theEvent
 {
   NSPoint thepoint;
+  t_xpoint point;
 
   thepoint = [theEvent locationInWindow];
   //  printf("Mouse moved  pos: %f, %f\n", thepoint.x, thepoint.y);
   if (event_funct[ON_MOUSEMOVE] != NULL)
-    event_funct[ON_MOUSEMOVE]((int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[ON_MOUSEMOVE]);
+  {
+    point.x = (int)(thepoint.x);
+    point.y = size_y - 1 - (int)(thepoint.y);
+    event_funct[ON_MOUSEMOVE](point, event_param[ON_MOUSEMOVE]);
+  }
 }
 
 
 - (void) rightMouseDragged:(NSEvent *)theEvent
 {
   NSPoint thepoint;
+  t_xpoint point;
 
   thepoint = [theEvent locationInWindow];
   //  printf("Mouse moved  pos: %f, %f\n", thepoint.x, thepoint.y);
   if (event_funct[ON_MOUSEMOVE] != NULL)
-    event_funct[ON_MOUSEMOVE]((int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[ON_MOUSEMOVE]);
+  {
+    point.x = (int)(thepoint.x);
+    point.y = size_y - 1 - (int)(thepoint.y);
+    event_funct[ON_MOUSEMOVE](point, event_param[ON_MOUSEMOVE]);
+  }
 }
 
 
 - (void) otherMouseDragged:(NSEvent *)theEvent
 {
   NSPoint thepoint;
+  t_xpoint point;
 
   thepoint = [theEvent locationInWindow];
   //  printf("Mouse moved  pos: %f, %f\n", thepoint.x, thepoint.y);
   if (event_funct[ON_MOUSEMOVE] != NULL)
-    event_funct[ON_MOUSEMOVE]((int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[ON_MOUSEMOVE]);
+  {
+    point.x = (int)(thepoint.x);
+    point.y = size_y - 1 - (int)(thepoint.y);
+    event_funct[ON_MOUSEMOVE](point, event_param[ON_MOUSEMOVE]);
+  }
 }
 
 
 - (void) scrollWheel:(NSEvent *)theEvent
 {
   NSPoint  thepoint;
-  t_xpoint wheel;
+  t_xwheel wheel;
+  t_xpoint point;
   int      button;
   double   sens;
 
@@ -298,11 +349,13 @@ int get_mouse_button(NSEventType eventtype)
 
   button = 0;
   thepoint = [theEvent locationInWindow];
-  wheel.x = [theEvent deltaY];
-  wheel.y = [theEvent deltaX];
-  if (wheel.x != 0.0 || wheel.y != 0.0)
+  wheel.dx = [theEvent deltaY];
+  wheel.dy = [theEvent deltaX];
+  if (wheel.dx != 0.0 || wheel.dy != 0.0)
   {
-    event_funct[ON_MOUSEWHEEL](wheel, (int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[ON_MOUSEDOWN]);
+    point.x = (int)(thepoint.x);
+    point.y = size_y - 1 - (int)(thepoint.y);
+    event_funct[ON_MOUSEWHEEL](wheel, point, event_param[ON_MOUSEDOWN]);
   }
 }
 
