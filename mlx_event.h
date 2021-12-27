@@ -6,7 +6,7 @@
 /*   By: gphilipp <gphilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 18:06:24 by gphilipp          #+#    #+#             */
-/*   Updated: 2021/12/27 09:12:22 by gphilipp         ###   ########.fr       */
+/*   Updated: 2021/12/27 12:03:01 by gphilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,27 @@ typedef struct s_xwheel {
 	float		dx;
 	float		dy;
 }			t_xwheel;
+
+// https://developer.apple.com/documentation/appkit/nscursor?language=objc
+enum {
+	ARROW_CURSOR,
+	IBEAM_CURSOR,
+	CROSSHAIR_CURSOR,
+	CLOSEDHAND_CURSOR,
+	OPENHAND_CURSOR,
+	POINTINGHAND_CURSOR,
+	RESIZELEFT_CURSOR,
+	RESIZERIGHT_CURSOR,
+	RESIZELEFTRIGHT_CURSOR,
+	RESIZEUP_CURSOR,
+	RESIZEDOWN_CURSOR,
+	RESIZEUPDOWN_CURSOR,
+	DISAPPEARINGITEM_CURSOR,
+	IBEAM_CURSOR_FORVERTICALLAYOUT,
+	OPERATIONNOTALLOWED_CURSOR,
+	DRAGLINK_CURSOR,
+	DRAGCOPY_CURSOR,
+	CONTEXTUALMENU_CURSOR
+};
 
 #endif

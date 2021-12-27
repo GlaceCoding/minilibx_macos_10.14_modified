@@ -764,6 +764,68 @@ int     mlx_do_key_autorepeaton(mlx_ptr_t *mlx_ptr)
   return (0);
 }
 
+/* cursor */
+void      mlx_set_cursor(int cursor)
+{
+  switch (cursor)
+  {
+    case ARROW_CURSOR:
+      [[NSCursor arrowCursor] set]; break;
+    case IBEAM_CURSOR:
+      [[NSCursor IBeamCursor] set]; break;
+    case CROSSHAIR_CURSOR:
+      [[NSCursor crosshairCursor] set]; break;
+    case CLOSEDHAND_CURSOR:
+      [[NSCursor closedHandCursor] set]; break;
+    case OPENHAND_CURSOR:
+      [[NSCursor openHandCursor] set]; break;
+    case POINTINGHAND_CURSOR:
+      [[NSCursor pointingHandCursor] set]; break;
+    case RESIZELEFT_CURSOR:
+      [[NSCursor resizeLeftCursor] set]; break;
+    case RESIZERIGHT_CURSOR:
+      [[NSCursor resizeRightCursor] set]; break;
+    case RESIZELEFTRIGHT_CURSOR:
+      [[NSCursor resizeLeftRightCursor] set]; break;
+    case RESIZEUP_CURSOR:
+      [[NSCursor resizeUpCursor] set]; break;
+    case RESIZEDOWN_CURSOR:
+      [[NSCursor resizeDownCursor] set]; break;
+    case RESIZEUPDOWN_CURSOR:
+      [[NSCursor resizeUpDownCursor] set]; break;
+    case DISAPPEARINGITEM_CURSOR:
+      [[NSCursor disappearingItemCursor] set]; break;
+    case IBEAM_CURSOR_FORVERTICALLAYOUT:
+      [[NSCursor IBeamCursorForVerticalLayout] set]; break;
+    case OPERATIONNOTALLOWED_CURSOR:
+      [[NSCursor operationNotAllowedCursor] set]; break;
+    case DRAGLINK_CURSOR:
+      [[NSCursor dragLinkCursor] set]; break;
+    case DRAGCOPY_CURSOR:
+      [[NSCursor dragCopyCursor] set]; break;
+    case CONTEXTUALMENU_CURSOR:
+      [[NSCursor contextualMenuCursor] set]; break;
+    default: [[NSCursor arrowCursor] set];
+  }
+}
+
+
+void     mlx_toggle_cursor(int display)
+{
+  // Each call to hide cursor must have a corresponding unhide call
+  static int    state = -1;
+
+  if (!display)
+  {
+    if (state != 0)
+      [NSCursor hide];
+    state = 0;
+    return ;
+  }
+  if (state == 0)
+    [NSCursor unhide];
+  state = 1;
+}
 
 int     mlx_destroy_window(mlx_ptr_t *mlx_ptr, mlx_win_list_t *win_to_del)
 {

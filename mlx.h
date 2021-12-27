@@ -120,6 +120,13 @@ int				mlx_do_key_autorepeaton(void *mlx_ptr);
 int				mlx_do_sync(void *mlx_ptr);
 
 /*
+** Custom:
+*/
+
+void			mlx_set_cursor(int cursor);
+void			mlx_toggle_cursor(int display);
+
+/*
 **  Utils…
 */
 
