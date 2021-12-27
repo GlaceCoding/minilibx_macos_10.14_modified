@@ -221,7 +221,7 @@ void	*mlx_int_parse_xpm(mlx_ptr_t *xvar,void *info,int info_size,char *(*f)())
 
 
   i = height;
-  data = img->buffer;
+  data = (char *)img->buffer;
   while (i--)
     {
       if (!(line = f(info,&pos,info_size)))
@@ -299,7 +299,7 @@ void	mlx_int_file_get_rid_comment(char *ptr, int size)
 }
 
 
-void	*mlx_xpm_file_to_image(mlx_ptr_t *xvar,char *file,int *width,int *height)
+mlx_img_list_t	*mlx_xpm_file_to_image(mlx_ptr_t *xvar,char *file,int *width,int *height)
 {
   int	fd;
   int	size;
@@ -325,7 +325,7 @@ void	*mlx_xpm_file_to_image(mlx_ptr_t *xvar,char *file,int *width,int *height)
   return (img);
 }
 
-void	*mlx_xpm_to_image(mlx_ptr_t *xvar,char **xpm_data,int *width,int *height)
+mlx_img_list_t	*mlx_xpm_to_image(mlx_ptr_t *xvar,char **xpm_data,int *width,int *height)
 {
   mlx_img_list_t	*img;
 

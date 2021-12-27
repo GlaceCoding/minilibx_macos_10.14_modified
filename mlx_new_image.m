@@ -12,7 +12,7 @@
 
 
 
-void    *mlx_new_image(mlx_ptr_t *mlx_ptr, int width, int height)
+mlx_img_list_t *mlx_new_image(mlx_ptr_t *mlx_ptr, int width, int height)
 {
   mlx_img_list_t        *newimg;
 
@@ -95,7 +95,7 @@ void    mlx_put_image_to_window(mlx_win_list_t *win_ptr, mlx_img_list_t *img_ptr
 
 // assume here 32bpp little endian
 
-char    *mlx_get_data_addr(mlx_img_list_t *img_ptr, int *bits_per_pixel, int *size_line, int *endian)
+unsigned char    *mlx_get_data_addr(mlx_img_list_t *img_ptr, int *bits_per_pixel, int *size_line, int *endian)
 {
   *bits_per_pixel = UNIQ_BPP*8;
   *size_line = img_ptr->width*UNIQ_BPP;

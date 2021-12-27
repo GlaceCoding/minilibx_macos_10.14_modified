@@ -40,7 +40,7 @@ void do_loop_flush(CFRunLoopObserverRef observer, CFRunLoopActivity activity, vo
 
 
 
-void *mlx_init()
+mlx_ptr_t *mlx_init()
 {
   mlx_ptr_t	*new_mlx;
   int		bidon;
@@ -69,9 +69,9 @@ void *mlx_init()
   [[NSRunningApplication currentApplication] activateWithOptions:NSApplicationActivateIgnoringOtherApps];
 
   // load font
-  new_mlx->font = mlx_new_image(new_mlx, (FONT_WIDTH+2)*95, FONT_HEIGHT);
+  new_mlx->font = mlx_new_image(new_mlx, IMG_FONT_SIZE, FONT_HEIGHT);
   i = 0;
-  while (i < 4*(FONT_WIDTH+2)*95*FONT_HEIGHT)
+  while (i < 4*IMG_FONT_SIZE*FONT_HEIGHT)
     {
       new_mlx->font->buffer[i+0] = font_atlas.pixel_data[i+2];
       new_mlx->font->buffer[i+1] = font_atlas.pixel_data[i+1];
