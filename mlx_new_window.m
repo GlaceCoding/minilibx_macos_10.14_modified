@@ -288,27 +288,22 @@ int get_mouse_button(NSEventType eventtype)
 
 - (void) scrollWheel:(NSEvent *)theEvent
 {
-  NSPoint thepoint;
-  int     button;
-  float	  sens;
+  NSPoint  thepoint;
+  t_xpoint wheel;
+  int      button;
+  double   sens;
 
-  if (event_funct[ON_MOUSEDOWN] == NULL)
+  if (event_funct[ON_MOUSEWHEEL] == NULL)
     return ;
 
   button = 0;
   thepoint = [theEvent locationInWindow];
-  sens = [theEvent deltaY];
-  if (sens > 0.2)
-    button = 4;
-  if (sens < -0.2)
-    button = 5;
-  sens = [theEvent deltaX];
-  if (sens > 0.2)
-    button = 6;
-  if (sens < -0.2)
-    button = 7;
-  if (button != 0)
-    event_funct[ON_MOUSEDOWN](button, (int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[ON_MOUSEDOWN]);
+  wheel.x = [theEvent deltaY];
+  wheel.y = [theEvent deltaX];
+  if (wheel.x != 0.0 || wheel.y != 0.0)
+  {
+    event_funct[ON_MOUSEWHEEL](wheel, (int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[ON_MOUSEDOWN]);
+  }
 }
 
 
