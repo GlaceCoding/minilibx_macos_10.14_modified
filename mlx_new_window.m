@@ -726,7 +726,7 @@ void *mlx_new_window(mlx_ptr_t *mlx_ptr, int size_x, int size_y, char *title)
 }
 
 
-void mlx_clear_window(mlx_ptr_t *mlx_ptr, mlx_win_list_t *win_ptr)
+void mlx_clear_window(mlx_win_list_t *win_ptr)
 {
   [(id)(win_ptr->winid) selectGLContext];
   [(id)(win_ptr->winid) clearWin];

@@ -60,9 +60,8 @@ void			*mlx_new_window(void *mlx_ptr, int size_x, int size_y,
 /*
 **  return void *0 if failed
 */
-int				mlx_clear_window(void *mlx_ptr, void *win_ptr);
-int				mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y,
-					int color);
+int				mlx_clear_window(void *win_ptr);
+int				mlx_pixel_put(void *win_ptr, int x, int y, int color);
 /*
 **  origin for x & y is top left corner of the window
 **  y down is positive
@@ -77,7 +76,7 @@ void			*mlx_new_image(void *mlx_ptr, int width, int height);
 /*
 **  return void *0 if failed
 */
-char			*mlx_get_data_addr(void *img_ptr, int *bits_per_pixel,
+unsigned char	*mlx_get_data_addr(void *img_ptr, int *bits_per_pixel,
 					int *size_line, int *endian);
 
 /*
@@ -86,7 +85,7 @@ char			*mlx_get_data_addr(void *img_ptr, int *bits_per_pixel,
 **           endian
 */
 
-int				mlx_put_image_to_window(void *mlx_ptr, void *win_ptr,
+int				mlx_put_image_to_window(void *win_ptr,
 					void *img_ptr, int x, int y);
 unsigned int	mlx_get_color_value(void *mlx_ptr, int color);
 

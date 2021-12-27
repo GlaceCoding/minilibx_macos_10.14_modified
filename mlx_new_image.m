@@ -73,7 +73,7 @@ mlx_img_ctx_t	*add_img_to_ctx(mlx_img_list_t *img, mlx_win_list_t *win)
 }
 
 
-void    mlx_put_image_to_window(mlx_ptr_t *mlx_ptr, mlx_win_list_t *win_ptr, mlx_img_list_t *img_ptr, int x, int y)
+void    mlx_put_image_to_window(mlx_win_list_t *win_ptr, mlx_img_list_t *img_ptr, int x, int y)
 {
   mlx_img_ctx_t	*imgctx;
 
