@@ -141,19 +141,53 @@ int mlx_string_put(mlx_ptr_t *mlx_ptr, mlx_win_list_t *win_ptr, int x, int y, in
 
 int mlx_better(mlx_win_list_t *win_ptr)
 {
-      NSGraphicsContext *context = win_ptr->ctx;
-
-      [NSGraphicsContext saveGraphicsState];
-      [NSGraphicsContext setCurrentContext:context];
-
-    NSBezierPath *line = [NSBezierPath bezierPath];
+    NSGraphicsContext *context = win_ptr->ctx;
     NSView *view = [(id)(win_ptr->winid) content_view];
-    [[NSColor greenColor] set];
-    [[NSColor greenColor] release];
-    [line moveToPoint:NSMakePoint(NSMinX([view bounds]), NSMinY([view bounds]))];
-    [line lineToPoint:NSMakePoint(NSMaxX([view bounds]), NSMaxY([view bounds]))];
-    [line setLineWidth:5.0]; /// Make it easy to see
-    [line stroke];
+
+    CGContextRef ctx = [context graphicsPort];
+
+    CGContextSetRGBStrokeColor(ctx, 1.0, 1.0, 1.0, 1.0);
+    CGContextSetRGBFillColor(ctx, 0.0, 0.0, 1.0, 1.0);
+    CGContextSetLineWidth(ctx, 2.0);
+    CGContextAddEllipseInRect(ctx, CGRectMake(30.0, 30.0, 60.0, 60.0));
+    CGContextStrokePath(ctx);
+    CGContextStrokeEllipseInRect(ctx, CGRectMake(30.0, 120.0, 60.0, 60.0));
+    CGContextFillEllipseInRect(ctx, CGRectMake(30.0, 210.0, 60.0, 60.0));
+    CGContextAddArc(ctx, 150.0, 60.0, 30.0, 0.0, M_PI/2.0, false);
+    CGContextStrokePath(ctx);
+    CGContextAddArc(ctx, 150.0, 60.0, 30.0, 3.0*M_PI/2.0, M_PI, true);
+    CGContextStrokePath(ctx);
+    CGContextAddArc(ctx, 150.0, 150.0, 30.0, 0.0, M_PI/2.0, false);
+    CGContextAddArc(ctx, 150.0, 150.0, 30.0, 3.0*M_PI/2.0, M_PI, true);
+    CGContextStrokePath(ctx);
+    CGContextAddArc(ctx, 150.0, 240.0, 30.0, 0.0, M_PI/2.0, false);
+    CGContextAddArc(ctx, 150.0, 240.0, 30.0, M_PI, 3.0*M_PI/2.0, false);
+    CGContextStrokePath(ctx);
+    CGPoint p[3] =
+    {
+        CGPointMake(210.0, 30.0),
+        CGPointMake(210.0, 60.0),
+        CGPointMake(240.0, 60.0),
+    };
+    CGContextMoveToPoint(ctx, p[0].x, p[0].y);
+    CGContextAddArcToPoint(ctx, p[1].x, p[1].y, p[2].x, p[2].y, 30.0);
+    CGContextStrokePath(ctx);
+    CGContextSetRGBStrokeColor(ctx, 1.0, 0.0, 0.0, 1.0);
+    CGContextAddLines(ctx, p, sizeof(p)/sizeof(p[0]));
+    CGContextStrokePath(ctx);
+    CGContextSetRGBStrokeColor(ctx, 1.0, 1.0, 1.0, 1.0);
+    CGRect rrect = CGRectMake(210.0, 90.0, 60.0, 60.0);
+    CGFloat radius = 10.0;
+    CGFloat minx = CGRectGetMinX(rrect), midx = CGRectGetMidX(rrect), maxx = CGRectGetMaxX(rrect);
+    CGFloat miny = CGRectGetMinY(rrect), midy = CGRectGetMidY(rrect), maxy = CGRectGetMaxY(rrect);
+    CGContextMoveToPoint(ctx, minx, midy);
+    CGContextAddArcToPoint(ctx, minx, miny, midx, miny, radius);
+    CGContextAddArcToPoint(ctx, maxx, miny, maxx, midy, radius);
+    CGContextAddArcToPoint(ctx, maxx, maxy, midx, maxy, radius);
+    CGContextAddArcToPoint(ctx, minx, maxy, minx, midy, radius);
+    CGContextClosePath(ctx);
+    CGContextDrawPath(ctx, kCGPathFillStroke);
+    return (0);
 }
 
 int     mlx_destroy_image(mlx_ptr_t *mlx_ptr, mlx_img_list_t *img_todel)
