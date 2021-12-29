@@ -349,8 +349,8 @@ int get_mouse_button(NSEventType eventtype)
 
   button = 0;
   thepoint = [theEvent locationInWindow];
-  wheel.dx = [theEvent deltaY];
-  wheel.dy = [theEvent deltaX];
+  wheel.dx = [theEvent deltaX];
+  wheel.dy = [theEvent deltaY];
   if (wheel.dx != 0.0 || wheel.dy != 0.0)
   {
     point.x = (int)(thepoint.x);
