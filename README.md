@@ -5,6 +5,7 @@ The based version of this minilibx use Cocoa (AppKit) and OpenGL without X11. It
 I have decided to customize minilibx to improve support of functionnalities and system events.
 
 Changes:
+  - Add argument to set the maximum of FPS with `mlx_put_image_to_window`.
   - Added `mlx_toggle_cursor` function to hide/unhide cursor.
   - Added `mlx_set_cursor` function to change the cursor icon.
   - Better mousewheel listener with speed (deltaX and deltaY), we only had the direction without the speed before my change.
@@ -51,6 +52,14 @@ Add this flag: `-L$(MINILIBX) -lmlx -framework OpenGL -framework AppKit` to comp
 Add `libs libs_clean libs_fclean` to `.PHONY`rule.
 
 ## Modified API
+
+### mlx_loop_hook
+
+Add `fps` argument. New prototype:
+
+```c
+int    mlx_loop_hook(mlx_ptr_t *mlx_ptr, int fps, int (*funct_ptr)(), void *param);
+```
 
 ### mlx_hook
 

@@ -105,8 +105,9 @@ unsigned int	mlx_get_color_value(mlx_ptr_t *mlx_ptr, int color);
 
 int				mlx_hook(mlx_win_list_t *win_ptr, int x_event, int (*funct)(),
 					void *param);
-int				mlx_loop_hook(mlx_ptr_t *mlx_ptr, int (*funct_ptr)(), void *param);
-				// 							 int (*funct_ptr)(void *param)
+int				mlx_loop_hook(mlx_ptr_t *mlx_ptr, int fps,
+					int (*funct_ptr)(), void *param);
+				// 	int (*funct_ptr)(void *param)
 int				mlx_loop(mlx_ptr_t *mlx_ptr);
 
 /*
