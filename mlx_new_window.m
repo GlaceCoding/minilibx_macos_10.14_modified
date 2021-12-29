@@ -396,9 +396,9 @@ int get_mouse_button(NSEventType eventtype)
 
 - (id) initWithRect: (NSRect)rect andTitle: (NSString *)title pfaAttrs: (NSOpenGLPixelFormatAttribute *)attrs
 {
-  NSOpenGLPixelFormat* pixFmt = [[NSOpenGLPixelFormat alloc] initWithAttributes:attrs];
+  //NSOpenGLPixelFormat* pixFmt = [[NSOpenGLPixelFormat alloc] initWithAttributes:attrs];
 
-  if ((self = [super initWithFrame:rect pixelFormat:pixFmt]) != nil)
+  if ((self = [super initWithFrame:rect]) != nil)
     {
       NSUInteger windowStyle = NSWindowStyleMaskTitled | NSWindowStyleMaskClosable | NSWindowStyleMaskMiniaturizable;
 
@@ -417,9 +417,9 @@ int get_mouse_button(NSEventType eventtype)
       //      [ctx setView:self];
       //      [ctx makeCurrentContext];
 
-      [[self openGLContext] makeCurrentContext];
-      [[self openGLContext] setView:self];
-      [self prepareOpenGL];
+      //[[self openGLContext] makeCurrentContext];
+      //[[self openGLContext] setView:self];
+      //[self prepareOpenGL];
 
       [self setNextKeyView:self];
 
@@ -438,11 +438,10 @@ int get_mouse_button(NSEventType eventtype)
       size_x = rect.size.width;
       size_y = rect.size.height;
 
-      glClearColor(0, 0, 0, 0);
-      glClear(GL_COLOR_BUFFER_BIT);
-      glFlush();
+      //glClearColor(0, 0, 0, 0);
+      //glClear(GL_COLOR_BUFFER_BIT);
+      //glFlush();
 
-      //[win makeKeyAndOrderFront:nil];
       // BOOL r = [win isKeyWindow];
       //  if (r==YES) printf("keywindow ok\n"); else printf("keywindow KO\n");
 
@@ -456,9 +455,19 @@ int get_mouse_button(NSEventType eventtype)
       //      BOOL r = [win makeFirstResponder:nil];
       //      if (r==YES) printf("responder ok\n"); else printf("responder KO\n");
 
-      [pixFmt release];
+      //[pixFmt release];
     }
   return (self);
+}
+
+- (NSGraphicsContext *) graphics_context
+{
+  return [win graphicsContext];
+}
+
+- (NSView *) content_view
+{
+  return [win contentView];
 }
 
 - (int)	pixel_management
@@ -716,12 +725,14 @@ mlx_win_list_t *mlx_new_window(mlx_ptr_t *mlx_ptr, int width, int height, char *
   NSRect windowRect = NSMakeRect(100, 100, width, height);
   str = [NSString stringWithCString:title encoding:NSASCIIStringEncoding];
   newwin->winid = [[MlxWin alloc] initWithRect:windowRect andTitle:str pfaAttrs:pfa_attrs];
-  if (newwin->winid)
-    if (![(id)(newwin->winid) pixel_management])
+  newwin->ctx = [(id)newwin->winid graphics_context];
+   /*if (newwin->winid)
+   if (![(id)(newwin->winid) pixel_management])
       {
 	[(id)(newwin->winid) destroyPixelManagement];
 	[(id)(newwin->winid) destroyMe];
-      }
+      }*/
+  mlx_better(newwin);
   return ((void *)newwin);
 }
 

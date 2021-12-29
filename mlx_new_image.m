@@ -139,6 +139,23 @@ int mlx_string_put(mlx_ptr_t *mlx_ptr, mlx_win_list_t *win_ptr, int x, int y, in
   return (0);
 }
 
+int mlx_better(mlx_win_list_t *win_ptr)
+{
+      NSGraphicsContext *context = win_ptr->ctx;
+
+      [NSGraphicsContext saveGraphicsState];
+      [NSGraphicsContext setCurrentContext:context];
+
+    NSBezierPath *line = [NSBezierPath bezierPath];
+    NSView *view = [(id)(win_ptr->winid) content_view];
+    [[NSColor greenColor] set];
+    [[NSColor greenColor] release];
+    [line moveToPoint:NSMakePoint(NSMinX([view bounds]), NSMinY([view bounds]))];
+    [line lineToPoint:NSMakePoint(NSMaxX([view bounds]), NSMaxY([view bounds]))];
+    [line setLineWidth:5.0]; /// Make it easy to see
+    [line stroke];
+}
+
 int     mlx_destroy_image(mlx_ptr_t *mlx_ptr, mlx_img_list_t *img_todel)
 {
   mlx_img_ctx_t	ctx_first;

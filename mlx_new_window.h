@@ -46,6 +46,8 @@
 }
 
 - (id) initWithRect: (NSRect)rect andTitle: (NSString *)title pfaAttrs: (NSOpenGLPixelFormatAttribute *)attrs;
+- (NSGraphicsContext *) graphics_context;
+- (NSView *) content_view;
 - (void) selectGLContext;
 - (void) flushGLContext;
 - (void) pixelPutColor: (int)color X:(int)x Y:(int)y;

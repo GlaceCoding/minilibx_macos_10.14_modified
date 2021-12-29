@@ -19,6 +19,9 @@ typedef struct mlx_img_list_s	mlx_img_list_t;
 typedef struct mlx_img_ctx_s	mlx_img_ctx_t;
 typedef struct mlx_win_list_s	mlx_win_list_t;
 
+
+int				mlx_better(mlx_win_list_t *win);
+
 struct mlx_img_list_s
 {
 	int					width;
@@ -40,6 +43,7 @@ struct mlx_win_list_s
 {
 	void				*winid;
 	mlx_img_ctx_t		*img_list;
+	void				*ctx;
 	int					nb_flush;
 	int					pixmgt;
 	mlx_win_list_t		*next;
