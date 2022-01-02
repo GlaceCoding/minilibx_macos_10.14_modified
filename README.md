@@ -209,19 +209,23 @@ void    draw_char(t_img *img, t_point pos, char letter)
 {
     t_app       *app;
     int         i;
-    int         j;
-    int         k;
+    t_point     font;
+    int         destid;
+    int         srcid;
 
     app = get_app();
-    i = 0;
-    while (i < FONT_WIDTH * FONT_HEIGHT)
+    i = FONT_WIDTH * FONT_HEIGHT;
+    if (!(32 < letter && letter <= 127))
+        return ;
+    while (i-- > 0)
     {
-        j = (i % FONT_WIDTH) + (i / FONT_WIDTH) * WIDTH
-            + (WIDTH * pos.y) + pos.x;
-        k = (i % FONT_WIDTH) + (i / FONT_WIDTH) * IMG_FONT_SIZE
+        font = (t_point){i % FONT_WIDTH, i / FONT_WIDTH};
+        destid = (font.x + pos.x) + (font.y + pos.y) * img->width;
+        srcid = font.x + font.y * IMG_FONT_SIZE
             + (FONT_WIDTH + 2) * (letter - 32);
-        pixel_add_color(&img->buffer[4 * j], &app->mlx->font->buffer[4 * k]);
-        i++;
+        pixel_add_color(&img->buffer[4 * destid],
+            &app->mlx->font->buffer[4 * srcid], (t_uchar *)&color);
+        // *((int *) img->buffer[4 * destid]) = *((int *) app->mlx->font->buffer[4 * srcid]);
     }
 }
 
