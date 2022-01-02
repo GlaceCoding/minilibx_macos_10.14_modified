@@ -372,6 +372,18 @@ int get_mouse_button(NSEventType eventtype)
     event_funct[ON_FOCUSCHANGE](0, event_param[ON_FOCUSCHANGE]);
 }
 
+- (void) becomeKeyNotification:(NSNotification *)note
+{
+  if (event_funct[ON_KEYFOCUSCHANGE] != NULL)
+    event_funct[ON_KEYFOCUSCHANGE](1, event_param[ON_KEYFOCUSCHANGE]);
+}
+
+- (void) resignKeyNotification:(NSNotification *)note
+{
+  if (event_funct[ON_KEYFOCUSCHANGE] != NULL)
+    event_funct[ON_KEYFOCUSCHANGE](0, event_param[ON_KEYFOCUSCHANGE]);
+}
+
 - (void) miniaturizeNotification:(NSNotification *)note
 {
   if (event_funct[ON_VISIBILITYCHANGE] != NULL)
@@ -423,11 +435,10 @@ int get_mouse_button(NSEventType eventtype)
 
       [self setNextKeyView:self];
 
-      // NSWindowWillMoveNotification
-      // NSWindowDidMoveNotification
-
       [[NSNotificationCenter defaultCenter] addObserver:win selector:@selector(becomeMainNotification:) name:@"NSWindowDidBecomeMainNotification" object:win];
       [[NSNotificationCenter defaultCenter] addObserver:win selector:@selector(resignMainNotification:) name:@"NSWindowDidResignMainNotification" object:win];
+      [[NSNotificationCenter defaultCenter] addObserver:win selector:@selector(becomeKeyNotification:) name:@"NSWindowDidBecomeKeyNotification" object:win];
+      [[NSNotificationCenter defaultCenter] addObserver:win selector:@selector(resignKeyNotification:) name:@"NSWindowDidResignKeyNotification" object:win];
       [[NSNotificationCenter defaultCenter] addObserver:win selector:@selector(miniaturizeNotification:) name:@"NSWindowDidMiniaturizeNotification" object:win];
       [[NSNotificationCenter defaultCenter] addObserver:win selector:@selector(deminiaturizeNotification:) name:@"NSWindowDidDeminiaturizeNotification" object:win];
       [[NSNotificationCenter defaultCenter] addObserver:win selector:@selector(closeNotification:) name:@"NSWindowWillCloseNotification" object:win];

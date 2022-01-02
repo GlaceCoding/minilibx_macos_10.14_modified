@@ -85,10 +85,13 @@ enum {
     ON_MOUSEMOVE,
     ON_MOUSEWHEEL,
     ON_FOCUSCHANGE,
+    ON_KEYFOCUSCHANGE,
     ON_VISIBILITYCHANGE,
     ON_DESTROY
 };
 ```
+
+Note: `ON_FOCUSCHANGE` is fired when the [main window](https://developer.apple.com/documentation/appkit/nswindowdidbecomemainnotification) change, and `ON_KEYFOCUSCHANGE` is fired when the [key window](https://developer.apple.com/documentation/appkit/nswindowdidbecomekeynotification) change.
 
 ### mlx_put_image_to_window, mlx_clear_window and mlx_pixel_put
 

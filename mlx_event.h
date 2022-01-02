@@ -6,7 +6,7 @@
 /*   By: gphilipp <gphilipp@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 18:06:24 by gphilipp          #+#    #+#             */
-/*   Updated: 2021/12/27 12:03:01 by gphilipp         ###   ########.fr       */
+/*   Updated: 2022/01/02 15:57:35 by gphilipp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ enum {
 	ON_MOUSEMOVE,
 	ON_MOUSEWHEEL,
 	ON_FOCUSCHANGE,
+	ON_KEYFOCUSCHANGE,
 	ON_VISIBILITYCHANGE,
 	ON_DESTROY
 };
