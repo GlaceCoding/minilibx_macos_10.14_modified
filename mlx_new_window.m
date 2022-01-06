@@ -569,6 +569,17 @@ int get_mouse_button(NSEventType eventtype)
     [self mlx_gl_draw];
 }
 
+- (void) pixelsPutColors: (int *)colors X:(int)x Y:(int)y W:(int)w H:(int)h
+{
+  pixel_nb ++;
+
+  glBindTexture(GL_TEXTURE_2D, pixel_vbuffer);
+  glTexSubImage2D(GL_TEXTURE_2D, 0, x, y, w, h, GL_BGRA, GL_UNSIGNED_BYTE, (GLvoid *)(colors));
+
+  if (pixel_nb >= MAX_PIXEL_NB)
+    [self mlx_gl_draw];
+}
+
 - (void) destroyPixelManagement
 {
   free(pixtexbuff);

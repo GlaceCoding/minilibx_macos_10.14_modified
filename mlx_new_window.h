@@ -49,6 +49,7 @@
 - (void) selectGLContext;
 - (void) flushGLContext;
 - (void) pixelPutColor: (int)color X:(int)x Y:(int)y;
+- (void) pixelsPutColors: (int *)colors X:(int)x Y:(int)y W:(int)w H:(int)h;
 - (void) mlx_gl_draw;
 - (void) mlx_gl_draw_img:(mlx_img_list_t *)img andCtx:(mlx_img_ctx_t *)imgctx andX:(int)x andY:(int)y;
 - (void) mlx_gl_draw_font:(mlx_img_list_t *)img andCtx:(mlx_img_ctx_t *)imgctx andX:(int)x andY:(int)y andColor:(int)color glyphX:(int)gx glyphY:(int)gy;

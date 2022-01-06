@@ -115,6 +115,16 @@ void mlx_pixel_put(mlx_win_list_t *win_ptr, int x, int y, int color)
 }
 
 
+void mlx_pixels_put(mlx_win_list_t *win_ptr, t_xpoint pos, t_xpoint size, int *colors)
+{
+  if (!win_ptr->pixmgt)
+    return ;
+  [(id)(win_ptr->winid) selectGLContext];
+  [(id)(win_ptr->winid) pixelsPutColors:colors X:pos.x Y:pos.y W:size.x H:size.y];
+  win_ptr->nb_flush ++;
+}
+
+
 void	mlx_int_loop_once()
 {
   NSEvent *event;

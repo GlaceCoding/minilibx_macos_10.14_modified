@@ -63,6 +63,8 @@ mlx_win_list_t	*mlx_new_window(mlx_ptr_t *mlx_ptr, int width, int height,
 */
 int				mlx_clear_window(mlx_win_list_t *win_ptr);
 int				mlx_pixel_put(mlx_win_list_t *win_ptr, int x, int y, int color);
+void			mlx_pixels_put(mlx_win_list_t *win_ptr, t_xpoint pos,
+					t_xpoint size, int *colors);
 /*
 **  origin for x & y is top left corner of the window
 **  y down is positive

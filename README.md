@@ -157,6 +157,17 @@ int onmousemove(t_xpoint point, void *vars)
 }
 ```
 
+### mlx_pixels_put
+
+Add several pixels.
+
+```c
+void  mlx_pixels_put(mlx_win_list_t *win_ptr, t_xpoint pos, t_xpoint size, int *colors);
+```
+
+NOTE: `mlx_put_image_to_window` is fastest.
+
+
 ### Why this minilibx version ?
 
 #### More event
